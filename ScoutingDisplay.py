@@ -7,7 +7,7 @@ class ScoutingDisplay:
         self.allData = eval(file.read())
         file.close()
     def printTeamStats(self, teamNumber):
-        for teamData in allData:
+        for teamData in self.allData:
             if(teamData['teamNumber'] == str(teamNumber)):
                 print("Team Number: " + str(teamData['teamNumber']))
                 print("Team Name: " + teamData['teamName'])
@@ -18,17 +18,17 @@ class ScoutingDisplay:
                 plt.title(str(teamNumber) + "'s scores")
                 plt.show()
                 print("Average Score: " + str(teamData['averageScore']))
-                print("Chance of a circuit " + str(teamData['circuitChance']))
+                print("Chance of a circuit " + str(int(teamData['circuitChance'])) + "%")
                 print("Robot Type: " + str(teamData['robotType']))
-                print("Penalty Chance: " + str(teamData['averagePenaltyChance']))
-                print("Average Penalty Score(When they got a penalty, what was the average score?): " + str(teamData['averagePenaltyScore']))
+                print("Penalty Chance: " + str(int(teamData['averagePenaltyChance'])) + "%")
+                print("Average Penalty Score: " + str(teamData['averagePenaltyScore']))
                 print("Average Autonomous Score: " + str(teamData['averageAutonScore']))
                 print('\n\n')
     def printMultipleTeamStats(self, listOfTeams):
         for team in listOfTeams:
             self.printTeamStats(team)
     def printAllAverageScoresGraphAscending(self):
-        newList = sorted(allData, key=lambda team: team['averageScore'])
+        newList = sorted(self.allData, key=lambda team: team['averageScore'])
         allGraphs = []
         allTeams = []
         for team in newList:
@@ -42,3 +42,5 @@ class ScoutingDisplay:
         ax.get_xaxis().tick_bottom()
         ax.get_yaxis().tick_left()
         plt.show()
+
+x = ScoutingDisplay()
